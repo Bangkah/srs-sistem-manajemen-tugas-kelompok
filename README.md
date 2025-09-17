@@ -18,7 +18,7 @@ Dokumen ini disusun untuk menjelaskan kebutuhan perangkat lunak sistem manajemen
 
 ### 1.2 Lingkup Sistem
 
-Sistem ini akan dikembangkan menggunakan **Laravel + Tailwind CSS**, dengan basis data relasional (MySQL/PostgreSQL). Sistem dapat diakses melalui browser.
+Sistem ini akan dikembangkan menggunakan **Laravel + Tailwind CSS**, dengan basis data relasional (MySQL). Sistem dapat diakses melalui browser.
 Lingkup utama sistem:
 
 * Registrasi dan autentikasi pengguna
@@ -132,7 +132,7 @@ Produk ini merupakan aplikasi web kolaborasi mirip Trello/Asana namun difokuskan
 
 * **Kinerja**: Sistem mampu menangani 100 user aktif bersamaan
 * **Keamanan**: Autentikasi & otorisasi berbasis role
-* **Portabilitas**: Dapat dijalankan di server Linux/Windows
+* **Portabilitas**: Dapat dijalankan di Desktop/Mobile
 * **Usability**: Antarmuka sederhana, responsif (Tailwind CSS)
 * **Reliabilitas**: Mendukung backup database
 
