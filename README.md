@@ -152,8 +152,4 @@ Mengacu pada ERD/dbdiagram:
 * Tampilan responsif (desktop & mobile)
 * Dashboard utama menampilkan daftar kelompok, proyek, dan tugas
 
----
 
-👉 Dengan SRS ini, kamu sudah punya **kerangka resmi** untuk memulai coding di Laravel.
-
-Mau aku lanjut bikinkan **flowchart alur sistem** (untuk melengkapi SRS) atau langsung masuk ke **struktur folder & rancangan database Laravel**?
