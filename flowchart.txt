@@ -1,0 +1,71 @@
+flowchart TD
+
+    %% === START ===
+    A([Mulai]) --> B{Sudah Punya Akun?}
+
+    %% === LOGIN / REGISTER ===
+    subgraph AUTH [Login & Registrasi]
+        B -->|Tidak| C[Registrasi]
+        C --> D[Simpan Data User]
+        D --> E[Masuk ke Dashboard]
+
+        B -->|Ya| F[Login]
+        F --> G{Validasi Data}
+        G -->|Valid| E
+        G -->|Tidak Valid| F
+    end
+
+    %% === ROLE & KELOMPOK ===
+    subgraph GROUP [Manajemen Kelompok]
+        E --> H{Peran User?}
+        H -->|Ketua| I[Membuat Kelompok Baru]
+        I --> J[Undang Anggota]
+        J --> K[Anggota Menerima Undangan]
+
+        H -->|Anggota| L[Bergabung via Kode/Undangan]
+    end
+
+    %% === PROYEK ===
+    subgraph PROJECT [Manajemen Proyek]
+        K --> M[Ketua Membuat Proyek Baru]
+        L --> M
+        M --> N[Simpan Proyek ke DB]
+    end
+
+    %% === TUGAS ===
+    subgraph TASK [Manajemen Tugas]
+        N --> O[Ketua Tambah Tugas Baru]
+        O --> P[Assign Tugas ke Anggota Tertentu]
+        P --> Q[Anggota Membaca Detail Tugas]
+        Q --> R[Update Status: To-Do / In Progress / Done]
+        R --> S{Tugas Ditandai Selesai?}
+        S -->|Tidak| R
+
+        S -->|Ya| T1[Upload Hasil: File/Lampiran Opsional]
+        T1 --> T2[Tambahkan Catatan Pengerjaan]
+        T2 --> U1[Ketua Review Hasil Tugas]
+        U1 --> U2{Disetujui Ketua?}
+        U2 -->|Tidak| R
+        U2 -->|Ya| V[Update Progress Proyek]
+    end
+
+    %% === KOLABORASI ===
+    subgraph COLLAB [Kolaborasi & Diskusi]
+        R --> C1[Diskusi via Komentar]
+        C1 --> C2[Notifikasi ke Anggota Lain]
+        C2 --> C3[Riwayat Komentar Tersimpan]
+
+        R --> C4[Upload Lampiran Tambahan]
+        C4 --> C5[Simpan File ke DB/Cloud]
+        C5 --> C6[Preview/Download oleh Anggota Lain]
+    end
+
+    %% === LAPORAN ===
+    subgraph REPORT [Monitoring & Laporan]
+        V --> L1[Ketua Membuka Dashboard Laporan]
+        L1 --> L2[Sistem Hitung Progress Otomatis]
+        L2 --> L3[Tampilkan Grafik Progres & Kontribusi]
+    end
+
+    %% === END ===
+    L3 --> Y([Selesai])

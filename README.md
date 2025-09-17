@@ -1,155 +1,138 @@
-# Software Requirement Specification (SRS)
-
-**Sistem Manajemen Tugas Kelompok**
-
----
-
-## 1. Pendahuluan
-
-### 1.1 Tujuan
-
-Dokumen ini disusun untuk menjelaskan kebutuhan perangkat lunak sistem manajemen kerja kelompok berbasis web (Laravel). Sistem ini akan membantu mahasiswa, dosen, atau anggota organisasi dalam:
-
-* Membentuk kelompok
-* Membuat dan mengelola proyek
-* Membagi tugas
-* Melakukan kolaborasi (komentar, unggah berkas)
-* Memantau progress proyek
-
-### 1.2 Lingkup Sistem
-
-Sistem ini akan dikembangkan menggunakan **Laravel + Tailwind CSS**, dengan basis data relasional (MySQL). Sistem dapat diakses melalui browser.
-Lingkup utama sistem:
-
-* Registrasi dan autentikasi pengguna
-* Manajemen kelompok (buat, gabung, keluar)
-* Manajemen proyek dalam kelompok
-* Manajemen tugas dalam proyek
-* Komunikasi lewat komentar dan unggahan file
-* Monitoring progress proyek secara real-time
-
-### 1.3 Definisi, Singkatan, dan Akronim
-
-* **User**: Pengguna sistem (mahasiswa/dosen/anggota organisasi).
-* **Admin**: Pengguna dengan hak akses khusus (misalnya ketua kelompok).
-* **Group**: Kelompok kerja yang berisi beberapa user.
-* **Project**: Pekerjaan besar yang dikerjakan oleh sebuah kelompok.
-* **Task**: Pekerjaan kecil yang merupakan bagian dari project.
+# Software Requirement Specification (SRS)  
+## Sistem Manajemen Tugas Kelompok  
 
 ---
 
-## 2. Deskripsi Umum
+## 1. Pendahuluan  
 
-### 2.1 Perspektif Produk
+### 1.1 Latar Belakang  
+Dalam pengerjaan tugas kelompok, sering terjadi masalah koordinasi seperti:  
+- Tugas tidak terbagi rata.  
+- Anggota tidak tahu progres teman yang lain.  
+- File tercecer tanpa dokumentasi jelas.  
+- Tidak ada laporan progres yang rapi.  
 
-Produk ini merupakan aplikasi web kolaborasi mirip Trello/Asana namun difokuskan untuk kebutuhan akademik/kelompok belajar.
+**Solusi:** Dibutuhkan **Sistem Manajemen Tugas Kelompok** berbasis web yang hanya melibatkan dua peran utama: **Ketua** dan **Anggota**.  
 
-### 2.2 Fungsi Utama
+### 1.2 Tujuan  
+- Membantu ketua membagi tugas ke anggota.  
+- Membantu anggota mengerjakan tugas dengan jelas.  
+- Menyediakan wadah kolaborasi (komentar & upload file).  
+- Mempermudah ketua memantau progres kelompok.  
 
-1. **Manajemen Pengguna**
-
-   * Registrasi, login, reset password
-   * Role: admin, ketua, anggota
-2. **Manajemen Kelompok**
-
-   * Membuat kelompok
-   * Mengundang anggota (via email/link join)
-   * Mengatur peran anggota (ketua/anggota)
-3. **Manajemen Proyek**
-
-   * Membuat proyek baru dalam kelompok
-   * Menetapkan deadline dan deskripsi
-   * Memantau progress proyek
-4. **Manajemen Tugas**
-
-   * Membuat, mengupdate, dan menghapus tugas
-   * Memberi prioritas dan deadline
-   * Menugaskan ke anggota tertentu
-   * Update status (*todo, in-progress, done*)
-5. **Kolaborasi**
-
-   * Komentar pada tugas
-   * Upload lampiran (dokumen/gambar)
-6. **Monitoring & Laporan**
-
-   * Progress proyek berdasarkan tugas selesai
-   * Riwayat aktivitas anggota
-
-### 2.3 Karakteristik Pengguna
-
-* **Mahasiswa**: sebagai anggota kelompok belajar
-* **Dosen/Pembimbing**: bisa menjadi admin/observer
-* **Organisasi/Lembaga**: sebagai admin untuk memantau progress
-
-### 2.4 Batasan
-
-* Sistem berbasis web, akses via browser
-* Autentikasi berbasis email & password
-* File upload dibatasi ukuran tertentu (misalnya 10MB)
-* Progress dihitung otomatis berdasarkan jumlah tugas yang selesai
+### 1.3 Ruang Lingkup  
+- Sistem berbasis **web**.  
+- Role pengguna: **Ketua** dan **Anggota**.  
+- Fitur utama:  
+  - Login & registrasi.  
+  - Manajemen kelompok.  
+  - Manajemen proyek & tugas.  
+  - Kolaborasi (komentar & file).  
+  - Laporan progres.  
 
 ---
 
-## 3. Kebutuhan Fungsional
+## 2. Deskripsi Umum  
 
-### 3.1 Modul Pengguna
+### 2.1 Aktor  
+- **Ketua**: Membuat kelompok, menambahkan proyek & tugas, memantau progres, memberi review.  
+- **Anggota**: Mengikuti kelompok, mengerjakan tugas, mengunggah hasil, ikut berdiskusi.  
 
-* User dapat mendaftar, login, logout
-* User dapat memperbarui profil
-* User dapat bergabung dalam satu atau lebih kelompok
+### 2.2 Fungsi Utama Sistem  
+1. **Autentikasi**  
+   - Registrasi akun (ketua/anggota).  
+   - Login untuk masuk dashboard.  
 
-### 3.2 Modul Kelompok
+2. **Manajemen Kelompok**  
+   - Ketua membuat kelompok.  
+   - Anggota bergabung ke kelompok.  
 
-* Ketua membuat kelompok
-* Anggota dapat menerima undangan
-* Ketua dapat menghapus anggota
+3. **Manajemen Proyek**  
+   - Ketua/anggota membuat proyek dalam kelompok.  
+   - Proyek terhubung ke kelompok.  
 
-### 3.3 Modul Proyek
+4. **Manajemen Tugas**  
+   - Ketua membuat tugas & assign ke anggota.  
+   - Anggota update status & upload hasil.  
+   - Ketua mereview hasil (approved/rejected).  
 
-* Ketua membuat proyek dalam kelompok
-* Anggota dapat melihat proyek
-* Ketua/anggota yang berwenang dapat menambah/menghapus proyek
+5. **Kolaborasi**  
+   - Anggota bisa berdiskusi lewat komentar.  
+   - Anggota bisa upload lampiran tambahan.  
 
-### 3.4 Modul Tugas
-
-* User membuat tugas pada proyek
-* Tugas memiliki status, prioritas, deadline
-* Tugas dapat ditugaskan ke anggota
-
-### 3.5 Modul Komentar & Lampiran
-
-* User menambahkan komentar di tugas
-* User mengunggah file sebagai lampiran
-
-### 3.6 Modul Monitoring
-
-* Progress proyek dihitung otomatis
-* Ketua dapat melihat laporan progress
+6. **Laporan Progres**  
+   - Ketua melihat laporan progres proyek.  
+   - Laporan otomatis dihitung dari status tugas.  
 
 ---
 
-## 4. Kebutuhan Non-Fungsional
+## 3. Kebutuhan Fungsional  
 
-* **Kinerja**: Sistem mampu menangani 100 user aktif bersamaan
-* **Keamanan**: Autentikasi & otorisasi berbasis role
-* **Portabilitas**: Dapat dijalankan di Desktop/Mobile
-* **Usability**: Antarmuka sederhana, responsif (Tailwind CSS)
-* **Reliabilitas**: Mendukung backup database
+| Kode | Kebutuhan Fungsional |
+|------|-----------------------|
+| F-01 | Sistem menyediakan registrasi & login untuk ketua/anggota. |
+| F-02 | Ketua dapat membuat kelompok. |
+| F-03 | Anggota dapat bergabung ke kelompok. |
+| F-04 | Ketua/anggota dapat membuat proyek dalam kelompok. |
+| F-05 | Ketua dapat membuat tugas dan mendistribusikan ke anggota. |
+| F-06 | Anggota dapat memperbarui status tugas. |
+| F-07 | Anggota dapat mengunggah file hasil tugas. |
+| F-08 | Ketua dapat memberi review hasil tugas (approve/reject). |
+| F-09 | Anggota dapat memberi komentar pada tugas. |
+| F-10 | Sistem menghasilkan laporan progres proyek. |
 
 ---
 
-## 5. Model Data
+## 4. Kebutuhan Non-Fungsional  
 
-Mengacu pada ERD/dbdiagram:
-
-* Tabel utama: `users`, `groups`, `group_user`, `projects`, `tasks`, `comments`, `attachments`.
+| Kode | Kebutuhan Non-Fungsional |
+|------|---------------------------|
+| NF-01 | Sistem berbasis web responsif. |
+| NF-02 | Sistem memiliki autentikasi login. |
+| NF-03 | Data tersimpan pada basis data relasional (MySQL/PostgreSQL). |
+| NF-04 | Sistem mendukung upload file (dokumen/lampiran). |
+| NF-05 | Sistem mendukung multi-user (ketua & anggota). |
+| NF-06 | Password disimpan dengan enkripsi. |
 
 ---
 
-## 6. Antarmuka
+## 5. Basis Data (Deskripsi)  
 
-* **UI/UX** dibuat dengan Tailwind CSS
-* Tampilan responsif (desktop & mobile)
-* Dashboard utama menampilkan daftar kelompok, proyek, dan tugas
+**Entitas Utama:**  
+- **users** → menyimpan data ketua & anggota.  
+- **groups** → kelompok yang dibuat ketua.  
+- **group_members** → relasi user dengan kelompok.  
+- **projects** → proyek dalam kelompok.  
+- **tasks** → tugas yang ada di dalam proyek.  
+- **task_submissions** → hasil upload tugas dari anggota.  
+- **comments** → diskusi anggota/ketua pada tugas.  
 
+**Relasi:**  
+- Satu **ketua** dapat membuat banyak **kelompok**.  
+- Satu **kelompok** berisi banyak **anggota**.  
+- Satu **kelompok** memiliki banyak **proyek**.  
+- Satu **proyek** memiliki banyak **tugas**.  
+- Satu **tugas** dapat memiliki banyak **submission** & **komentar**.  
+- Satu **anggota** dapat mengerjakan banyak tugas.  
 
+---
+
+## 6. Flowchart (Deskripsi Alur)  
+
+1. **User daftar → login → masuk dashboard.**  
+2. **Ketua membuat kelompok** lalu mengundang anggota.  
+3. **Ketua/anggota membuat proyek** di dalam kelompok.  
+4. **Ketua membuat tugas → assign ke anggota.**  
+5. **Anggota update status & upload hasil tugas.**  
+6. **Ketua review hasil (approve/reject).**  
+7. **Anggota & ketua berdiskusi lewat komentar/lampiran.**  
+8. **Ketua melihat laporan progres proyek.**  
+
+---
+
+## 7. Kesimpulan  
+SRS ini mendefinisikan kebutuhan sistem dengan **dua peran utama: ketua & anggota**. Sistem ini akan:  
+- Memudahkan ketua dalam mengatur kelompok dan tugas.  
+- Membantu anggota fokus pada tugas yang diberikan.  
+- Menyediakan kolaborasi & dokumentasi yang jelas.  
+- Memberikan laporan progres otomatis untuk monitoring kelompok.  
